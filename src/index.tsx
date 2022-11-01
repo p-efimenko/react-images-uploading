@@ -35,6 +35,7 @@ const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
   const [keyUpdate, setKeyUpdate] = useState<number>(DEFAULT_NULL_INDEX);
   const [errors, setErrors] = useState<ErrorsType>(null);
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleClickInput = useCallback(() => openFileDialog(inputRef), [
     inputRef,
@@ -120,9 +121,11 @@ const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
   const onInputChange = async (
     e: React.ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
+    setIsLoading(true);
     await handleChange(e.target.files);
     keyUpdate > DEFAULT_NULL_INDEX && setKeyUpdate(DEFAULT_NULL_INDEX);
     if (inputRef.current) inputRef.current.value = '';
+    setIsLoading(false);
   };
 
   const acceptTypeString = useMemo(
