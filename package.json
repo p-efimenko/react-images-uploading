@@ -1,6 +1,6 @@
 {
   "name": "fork-react-images-uploading",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "description": "The simple images uploader applied Render Props pattern. This approach allows you to fully control UI component and behaviours.",
   "author": {
     "name": "vutoan266",
@@ -48,7 +48,9 @@
     "contributors:generate": "./node_modules/.bin/all-contributors generate",
     "toc": "./node_modules/.bin/doctoc --notitle README.md"
   },
-  "dependencies": {},
+  "dependencies": {
+    "np": "^7.6.2"
+  },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
