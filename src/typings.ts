@@ -23,10 +23,13 @@ export interface ImageUploadingPropsType {
   dataURLKey?: string;
   inputProps?: React.HTMLProps<HTMLInputElement>;
   allowNonImageType?: boolean;
+  onUploadStart?(): void;
+  onUploadEnd?(): void;
 }
 
 export interface ExportInterface {
   imageList: ImageListType;
+  isLoading: boolean;
   onImageUpload: () => void;
   onImageRemoveAll: () => void;
   errors: ErrorsType;

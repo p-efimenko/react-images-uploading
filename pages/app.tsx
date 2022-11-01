@@ -18,12 +18,16 @@ export const App = () => {
   return (
     <div className="App">
       <ImageUploading
-        multiple
+        multiple={false}
+        acceptType={['mp4']}
         value={images}
         onChange={onChange}
         onError={onError}
         maxNumber={maxNumber}
         dataURLKey="data_url"
+        onUploadStart={() => console.log('onUploadStart')}
+        onUploadEnd={() => console.log('onUploadEnd')}
+        allowNonImageType={true}
       >
         {({
           imageList,
@@ -34,9 +38,11 @@ export const App = () => {
           isDragging,
           dragProps,
           errors,
+          isLoading,
         }) => (
           // write your own UI
           <div className="upload__image-wrapper">
+            {isLoading && <div>Loading...</div>}
             <button
               type="button"
               style={isDragging ? { color: 'red' } : undefined}

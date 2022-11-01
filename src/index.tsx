@@ -18,6 +18,8 @@ const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
   value = [],
   onChange,
   onError,
+  onUploadStart,
+  onUploadEnd,
   children,
   dataURLKey = DEFAULT_DATA_URL_KEY,
   multiple = false,
@@ -121,11 +123,13 @@ const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
   const onInputChange = async (
     e: React.ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
+    onUploadStart?.();
     setIsLoading(true);
     await handleChange(e.target.files);
     keyUpdate > DEFAULT_NULL_INDEX && setKeyUpdate(DEFAULT_NULL_INDEX);
     if (inputRef.current) inputRef.current.value = '';
     setIsLoading(false);
+    onUploadEnd?.();
   };
 
   const acceptTypeString = useMemo(
@@ -180,6 +184,7 @@ const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
       />
       {children?.({
         imageList: inValue,
+        isLoading: isLoading,
         onImageUpload,
         onImageRemoveAll,
         onImageUpdate,
